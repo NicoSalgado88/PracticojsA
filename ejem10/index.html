@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="fecha">Ingrese una fecha en formato DD-MM-YYYY:</label>
+<input type="text" id="fecha" name="fecha">
+<button onclick="calcularDias()">Calcular</button>
+
+<p id="resultado"></p>
+
+<script>
+    function calcularDias() {
+        var fecha = document.getElementById("fecha").value;
+    
+        var partes = fecha.split("-");
+        var dia = parseInt(partes[0]);
+        var mes = parseInt(partes[1]);
+        var año = parseInt(partes[2]);
+    
+        var fechaIngresada = new Date(año, mes - 1, dia);
+        var hoy = new Date();
+    
+        var milisegundosPorDia = 24 * 60 * 60 * 1000;
+    
+        var diasDiferencia = Math.round((fechaIngresada - hoy) / milisegundosPorDia);
+    
+        var resultadoElemento = document.getElementById("resultado");
+        if (diasDiferencia > 0) {
+            resultadoElemento.innerText = "Faltan " + diasDiferencia + " días respecto de hoy.";
+        } else if (diasDiferencia < 0) {
+            resultadoElemento.innerText = "Han pasado " + Math.abs(diasDiferencia) + " días desde hoy.";
+        } else {
+            resultadoElemento.innerText = "La fecha ingresada es hoy.";
+        }
+    }
+</script>
+</body>
+</html>
